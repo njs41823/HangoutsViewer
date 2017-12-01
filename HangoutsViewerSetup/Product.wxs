@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"><?define HangoutsViewer_TargetDir=$(var.HangoutsViewer.TargetDir)?>
+	<Product Id="87703EE9-305B-4D9F-A369-13843E86F922" Name="Hangouts Viewer" Language="1033" Version="1.0.0.0" Manufacturer="n8" UpgradeCode="CB09A66C-523F-4E62-907B-1E9E318533E8">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+    <Icon Id="hangoutsviewericon.ico" SourceFile="$(var.ProjectDir)Images\hangoutsviewericon.ico" />
+	  <Property Id="ARPPRODUCTICON" Value="hangoutsviewericon.ico" />
+    
+    <UIRef Id="WixUI_Minimal" />
+    
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate EmbedCab="yes" />
+
+    <WixVariable Id="WixUIBannerBmp" Value="$(var.ProjectDir)Images\hangoutsviewericon493x58.png" />
+    <WixVariable Id="WixUIDialogBmp" Value="$(var.ProjectDir)Images\hangoutsviewericon493x312.png" />
+    <WixVariable Id="WixUILicenseRtf" Value="$(var.ProjectDir)license.rtf" />
+
+		<Feature Id="ProductFeature" Title="Hangouts Viewer" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+      <ComponentRef Id="ApplicationShortcut" />
+      <ComponentRef Id="ApplicationShortcutDesktop" />
+		  <ComponentRef Id="InstallFonts" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="Hangouts Viewer" />
+			</Directory>
+		  <Directory Id="ProgramMenuFolder">
+		    <Directory Id="ApplicationProgramsFolder" Name="Hangouts Viewer" />
+		  </Directory>
+      <Directory Id="DesktopFolder" Name="Desktop" />
+		  <Directory Id="FontsFolder">
+		    <Component Id="InstallFonts" Guid="B8B7027A-2052-4268-B0FF-9BE6A0E96D7D" Permanent="yes">
+		      <File Id="Roboto_Regular.ttf" Source="$(var.ProjectDir)Fonts\Roboto-Regular.ttf" TrueType="yes" />
+		      <File Id="Roboto_Bold.ttf" Source="$(var.ProjectDir)Fonts\Roboto-Bold.ttf" TrueType="yes" />
+		    </Component>
+		  </Directory>
+		</Directory>
+	</Fragment>
+
+  <Fragment>
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="ApplicationShortcut" Guid="CEB73F5B-DDF2-482D-9549-36ECA669063E">
+        <Shortcut Id="ApplicationStartMenuShortcut" Name="Hangouts Viewer" Description="Hangouts Viewer" Target="[INSTALLFOLDER]HangoutsViewer.exe" />
+        <RemoveFolder Id="RemoveApplicationProgramsFolder" Directory="ApplicationProgramsFolder" On="uninstall" />
+        <RegistryValue Root="HKCU" Key="Software\HangoutsViewer" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+    <DirectoryRef Id="DesktopFolder">
+      <Component Id="ApplicationShortcutDesktop" Guid="6612456F-A153-4A51-AF04-120B21EFCEDB">
+        <Shortcut Id="ApplicationDesktopShortcut" Name="Hangouts Viewer" Description="Hangouts Viewer" Target="[INSTALLFOLDER]HangoutsViewer.exe" />
+        <RemoveFolder Id="RemoveDesktopFolder" Directory="DesktopFolder" On="uninstall" />
+        <RegistryValue Root="HKCU" Key="Software\HangoutsViewer" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<Component Id="HangoutsViewer.exe" Guid="44467BB2-6107-4FA6-9A2F-6AD1A832D60E">
+			  <File Id="HangoutsViewer.exe" Name="HangoutsViewer.exe" Source="$(var.HangoutsViewer_TargetDir)HangoutsViewer.exe" />
+			</Component>
+			<Component Id="HangoutsViewer.exe.config" Guid="67198B96-AED8-44FC-A5E5-D6028E94473A">
+			  <File Id="HangoutsViewer.exe.config" Name="HangoutsViewer.exe.config" Source="$(var.HangoutsViewer_TargetDir)HangoutsViewer.exe.config" />
+			</Component>
+			<Component Id="Newtonsoft.Json.dll" Guid="9D140339-A0A0-47E7-9ED4-D2FB22926882">
+			  <File Id="Newtonsoft.Json.dll" Name="Newtonsoft.Json.dll" Source="$(var.HangoutsViewer_TargetDir)Newtonsoft.Json.dll" />
+			</Component>
+			<Component Id="ServiceStack.Text.dll" Guid="914D11B4-6AA7-4F9E-B9DE-3A6899B3C961">
+			  <File Id="ServiceStack.Text.dll" Name="ServiceStack.Text.dll" Source="$(var.HangoutsViewer_TargetDir)ServiceStack.Text.dll" />
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>
