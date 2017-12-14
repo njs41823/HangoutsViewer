@@ -160,6 +160,9 @@
             this.HangoutsDataGrid.AllowUserToAddRows = false;
             this.HangoutsDataGrid.AllowUserToDeleteRows = false;
             this.HangoutsDataGrid.AllowUserToResizeRows = false;
+            this.HangoutsDataGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.HangoutsDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.HangoutsDataGrid.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.HangoutsDataGrid.BackgroundColor = System.Drawing.SystemColors.Window;
@@ -185,9 +188,8 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.HangoutsDataGrid.DefaultCellStyle = dataGridViewCellStyle2;
-            this.HangoutsDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.HangoutsDataGrid.EnableHeadersVisualStyles = false;
-            this.HangoutsDataGrid.Location = new System.Drawing.Point(0, 0);
+            this.HangoutsDataGrid.Location = new System.Drawing.Point(-1, 0);
             this.HangoutsDataGrid.MultiSelect = false;
             this.HangoutsDataGrid.Name = "HangoutsDataGrid";
             this.HangoutsDataGrid.ReadOnly = true;
@@ -195,7 +197,7 @@
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HangoutsDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.HangoutsDataGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.HangoutsDataGrid.Size = new System.Drawing.Size(160, 305);
+            this.HangoutsDataGrid.Size = new System.Drawing.Size(161, 305);
             this.HangoutsDataGrid.TabIndex = 0;
             // 
             // HangoutName
@@ -211,6 +213,9 @@
             this.SelectedHangoutEventsDataGrid.AllowUserToAddRows = false;
             this.SelectedHangoutEventsDataGrid.AllowUserToDeleteRows = false;
             this.SelectedHangoutEventsDataGrid.AllowUserToResizeRows = false;
+            this.SelectedHangoutEventsDataGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.SelectedHangoutEventsDataGrid.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.SelectedHangoutEventsDataGrid.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.SelectedHangoutEventsDataGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -238,13 +243,12 @@
             dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.SelectedHangoutEventsDataGrid.DefaultCellStyle = dataGridViewCellStyle9;
-            this.SelectedHangoutEventsDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SelectedHangoutEventsDataGrid.EnableHeadersVisualStyles = false;
             this.SelectedHangoutEventsDataGrid.Location = new System.Drawing.Point(0, 0);
             this.SelectedHangoutEventsDataGrid.Name = "SelectedHangoutEventsDataGrid";
             this.SelectedHangoutEventsDataGrid.ReadOnly = true;
             this.SelectedHangoutEventsDataGrid.RowHeadersVisible = false;
-            this.SelectedHangoutEventsDataGrid.Size = new System.Drawing.Size(620, 305);
+            this.SelectedHangoutEventsDataGrid.Size = new System.Drawing.Size(621, 305);
             this.SelectedHangoutEventsDataGrid.TabIndex = 4;
             // 
             // TimeStamp
