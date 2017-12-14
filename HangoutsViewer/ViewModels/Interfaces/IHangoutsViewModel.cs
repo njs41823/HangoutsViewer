@@ -31,6 +31,8 @@ namespace HangoutsViewer.ViewModels.Interfaces
 
         void SelectedHangoutEventsDataGridCellContentClick(object sender, DataGridViewCellEventArgs e);
 
+        void SelectedHangoutEventsDataGrid_ColumnDividerDoubleClick(object sender, DataGridViewColumnDividerDoubleClickEventArgs e);
+
         void HangoutsViewFormClosing(object sender, FormClosingEventArgs e);
     }
 }

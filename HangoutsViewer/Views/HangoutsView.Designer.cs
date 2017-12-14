@@ -86,7 +86,7 @@
             this.SelectedHangoutParticipantsLabelLabel.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SelectedHangoutParticipantsLabelLabel.Location = new System.Drawing.Point(83, 34);
             this.SelectedHangoutParticipantsLabelLabel.Name = "SelectedHangoutParticipantsLabelLabel";
-            this.SelectedHangoutParticipantsLabelLabel.Size = new System.Drawing.Size(82, 15);
+            this.SelectedHangoutParticipantsLabelLabel.Size = new System.Drawing.Size(80, 15);
             this.SelectedHangoutParticipantsLabelLabel.TabIndex = 1;
             this.SelectedHangoutParticipantsLabelLabel.Text = "Participants:";
             // 
@@ -139,7 +139,7 @@
             this.SelectedHangoutNameLabelLabel.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SelectedHangoutNameLabelLabel.Location = new System.Drawing.Point(67, 12);
             this.SelectedHangoutNameLabelLabel.Name = "SelectedHangoutNameLabelLabel";
-            this.SelectedHangoutNameLabelLabel.Size = new System.Drawing.Size(97, 15);
+            this.SelectedHangoutNameLabelLabel.Size = new System.Drawing.Size(96, 15);
             this.SelectedHangoutNameLabelLabel.TabIndex = 6;
             this.SelectedHangoutNameLabelLabel.Text = "Hangout Name:";
             this.SelectedHangoutNameLabelLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;

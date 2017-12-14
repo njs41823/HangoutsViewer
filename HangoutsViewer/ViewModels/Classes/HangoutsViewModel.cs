@@ -156,6 +156,17 @@ namespace HangoutsViewer.ViewModels.Classes
             }
         }
 
+        public void SelectedHangoutEventsDataGrid_ColumnDividerDoubleClick(object sender, DataGridViewColumnDividerDoubleClickEventArgs e)
+        {
+            if (!(sender is DataGridView selectedHangoutEventsDataGrid)) { return; }
+            if (e.ColumnIndex < 0 || e.ColumnIndex >= selectedHangoutEventsDataGrid.ColumnCount) { return; }
+            if (e.Button == MouseButtons.Left)
+            {
+                selectedHangoutEventsDataGrid.AutoResizeColumn(e.ColumnIndex, DataGridViewAutoSizeColumnMode.DisplayedCells);
+            }
+            e.Handled = true;
+        }
+
         public async void OpenToolStripMenuItemClick(object sender, EventArgs e)
         {
             string fileName;
@@ -241,6 +252,7 @@ namespace HangoutsViewer.ViewModels.Classes
                 saveFileDialog.AddExtension = true;
                 saveFileDialog.CheckPathExists = true;
                 saveFileDialog.DefaultExt = ".csv";
+                saveFileDialog.FileName = SelectedHangoutViewModel.Hangout.Name + ".csv";
                 saveFileDialog.Filter = "Csv files (*.csv)|*.csv";
                 saveFileDialog.RestoreDirectory = false;
                 saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
