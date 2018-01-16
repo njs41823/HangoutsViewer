@@ -15,14 +15,14 @@ namespace HangoutsViewer.DataAccess
 {
     public static class HangoutsJsonParser
     {
-        public const string RenameConversationEventTypeJToken = "RENAME_CONVERSATION";
-        public const string VideoChatEventTypeJToken = "HANGOUT_EventTypeJToken";
-        public const string RegularChatMessageEventTypeJToken = "REGULAR_CHAT_MESSAGE";
-        public const string AddUserEventTypeJToken = "ADD_USER";
-        public const string RemoveUserEventTypeJToken = "REMOVE_USER";
-        public const string SmsEventTypeJToken = "SMS";
-        public const string OnTheRecordModificationEventTypeJToken = "OTR_MODIFICATION";
-        public const string VoicemailEventTypeJToken = "VOICEMAIL";
+        private const string RenameConversationEventTypeJToken = "RENAME_CONVERSATION";
+        private const string VideoChatEventTypeJToken = "HANGOUT_EventTypeJToken";
+        private const string RegularChatMessageEventTypeJToken = "REGULAR_CHAT_MESSAGE";
+        private const string AddUserEventTypeJToken = "ADD_USER";
+        private const string RemoveUserEventTypeJToken = "REMOVE_USER";
+        private const string SmsEventTypeJToken = "SMS";
+        private const string OnTheRecordModificationEventTypeJToken = "OTR_MODIFICATION";
+        private const string VoicemailEventTypeJToken = "VOICEMAIL";
 
         public static async Task<IHangouts> ParseAsync(FileSystemInfo jsonFileInfo)
         {
