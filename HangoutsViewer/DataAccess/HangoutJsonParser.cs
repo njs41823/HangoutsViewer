@@ -61,13 +61,13 @@ namespace HangoutsViewer.DataAccess
                 string hangoutType = innerConvo["type"]?.ToString();
                 string hangoutName = innerConvo["name"]?.ToString();
 
-                if (string.IsNullOrEmpty(hangoutName)) { hangoutName = "Hangout_" + (convoIndex + 1).ToString().PadLeft(3, '0'); }
+                if (string.IsNullOrEmpty(hangoutName)) { hangoutName = $"Hangout_{(convoIndex + 1).ToString().PadLeft(3, '0')}"; }
 
                 List<IParticipant> hangoutParticipants =
                     (
                         from JToken p
                             in pdata
-                        select new Participant(p["id"]["chat_id"].ToString(), p["fallback_name"]?.ToString() ?? "unknown_" + p["id"]["chat_id"]) as IParticipant
+                        select new Participant(p["id"]["chat_id"].ToString(), p["fallback_name"]?.ToString() ?? $"unknown_{p["id"]["chat_id"]}") as IParticipant
                     ).ToList();
 
                 List<IHangoutEvent> hangoutEvents = new List<IHangoutEvent>();
@@ -86,7 +86,7 @@ namespace HangoutsViewer.DataAccess
                             in hangoutParticipants
                         where p.Id == senderId
                         select p
-                    ).DefaultIfEmpty(new Participant(senderId, "unknown_" + senderId)).First();
+                    ).DefaultIfEmpty(new Participant(senderId, $"unknown_{senderId}")).First();
 
                     // combine all message segments
                     string allMessageSegments = string.Empty;
@@ -172,7 +172,7 @@ namespace HangoutsViewer.DataAccess
                             string messageText = "new voicemail";
                             if (allMessageSegments != string.Empty)
                             {
-                                messageText = messageText + ":" + Environment.NewLine + allMessageSegments;
+                                messageText = $"{messageText}:{Environment.NewLine}{allMessageSegments}";
                             }
                             hangoutEvent = new VoicemailEvent(timeStamp, sender, messageText, attachmentUrl);
                             break;

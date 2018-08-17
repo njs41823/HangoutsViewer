@@ -23,7 +23,7 @@ namespace HangoutsViewer.ViewModels.Classes
             set
             {
                 _about = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("About"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(About)));
             }
         }
 
@@ -36,10 +36,11 @@ namespace HangoutsViewer.ViewModels.Classes
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "An error occurred while attempting to browse to " + e.LinkText + Environment.NewLine + Environment.NewLine +
-                    "Error Type: " + ex.GetType().Name + Environment.NewLine +
-                    "Error Message: " + ex.Message,
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    $"An error occurred while attempting to browse to {e.LinkText}{Environment.NewLine}{Environment.NewLine}" +
+                    $"Error Type: {ex.GetType().Name}{Environment.NewLine}" +
+                    $"Error Message: {ex.Message}{Environment.NewLine}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error
+                );
             }
         }
     }

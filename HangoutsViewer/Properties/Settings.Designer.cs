@@ -22,5 +22,17 @@ namespace HangoutsViewer.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://takeout.google.com/settings/takeout/custom/chat")]
+        public string GoogleTakeoutsUrl {
+            get {
+                return ((string)(this["GoogleTakeoutsUrl"]));
+            }
+            set {
+                this["GoogleTakeoutsUrl"] = value;
+            }
+        }
     }
 }

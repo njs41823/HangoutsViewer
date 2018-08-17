@@ -25,27 +25,27 @@ namespace HangoutsViewer.Views
 
         private void Bind()
         {
-            BindingSource hangoutsViewModelBinding = new BindingSource {DataSource = HangoutsViewModel};
-            BindingSource selectedHangoutViewModelBinding = new BindingSource {DataSource = HangoutsViewModel.SelectedHangoutViewModel};
-            
+            BindingSource hangoutsViewModelBinding = new BindingSource { DataSource = HangoutsViewModel };
+            BindingSource selectedHangoutViewModelBinding = new BindingSource { DataSource = HangoutsViewModel.SelectedHangoutViewModel };
+
             HangoutsDataGrid.AutoGenerateColumns = false;
             HangoutsDataGrid.DataBindings.Clear();
-            HangoutsDataGrid.DataBindings.Add(new Binding("DataSource", hangoutsViewModelBinding, "HangoutsDataGridSource"));
+            HangoutsDataGrid.DataBindings.Add(new Binding(nameof(HangoutsDataGrid.DataSource), hangoutsViewModelBinding, nameof(HangoutsViewModel.HangoutsDataGridSource)));
 
             SelectedHangoutEventsDataGrid.AutoGenerateColumns = false;
             SelectedHangoutEventsDataGrid.DataBindings.Clear();
-            SelectedHangoutEventsDataGrid.DataBindings.Add(new Binding("DataSource", selectedHangoutViewModelBinding, "HangoutEventViewModels"));
+            SelectedHangoutEventsDataGrid.DataBindings.Add(new Binding(nameof(SelectedHangoutEventsDataGrid.DataSource), selectedHangoutViewModelBinding, nameof(HangoutsViewModel.SelectedHangoutViewModel.HangoutEventViewModels)));
 
             SelectedHangoutNameLabel.DataBindings.Clear();
-            SelectedHangoutNameLabel.DataBindings.Add(new Binding("Text", selectedHangoutViewModelBinding, "Hangout.Name"));
+            SelectedHangoutNameLabel.DataBindings.Add(new Binding(nameof(SelectedHangoutNameLabel.Text), selectedHangoutViewModelBinding, $"{nameof(HangoutsViewModel.SelectedHangoutViewModel.Hangout)}.{nameof(HangoutsViewModel.SelectedHangoutViewModel.Hangout.Name)}"));
 
             SelectedHangoutParticipantsLabel.DataBindings.Clear();
-            SelectedHangoutParticipantsLabel.DataBindings.Add(new Binding("Text", selectedHangoutViewModelBinding, "ParticipantsString"));
+            SelectedHangoutParticipantsLabel.DataBindings.Add(new Binding(nameof(SelectedHangoutParticipantsLabel.Text), selectedHangoutViewModelBinding, nameof(HangoutsViewModel.SelectedHangoutViewModel.ParticipantsString)));
 
             SelectedHangoutMessagesCountLabel.DataBindings.Clear();
-            SelectedHangoutMessagesCountLabel.DataBindings.Add(new Binding("Text", selectedHangoutViewModelBinding, "MessageCountString"));
+            SelectedHangoutMessagesCountLabel.DataBindings.Add(new Binding(nameof(SelectedHangoutMessagesCountLabel.Text), selectedHangoutViewModelBinding, nameof(HangoutsViewModel.SelectedHangoutViewModel.MessageCountString)));
 
-            Binding exportButtonBinding = new Binding("Enabled", selectedHangoutViewModelBinding, "Hangout");
+            Binding exportButtonBinding = new Binding(nameof(ExportButton.Enabled), selectedHangoutViewModelBinding, nameof(HangoutsViewModel.SelectedHangoutViewModel.Hangout));
             exportButtonBinding.Format += (sender, e) => { e.Value = (IHangout)e.Value != null; };
             ExportButton.DataBindings.Add(exportButtonBinding);
 

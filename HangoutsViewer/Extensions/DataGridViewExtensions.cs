@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
 
-namespace HangoutsViewer.Classes
+namespace HangoutsViewer.Extensions
 {
-    public static class Extensions
+    public static class DataGridViewExtensions
     {
         public static void ExpandColumnsToFit(
             this DataGridView dataGrid,

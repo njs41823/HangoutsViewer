@@ -27,21 +27,21 @@ namespace HangoutsViewer.Views
             BindingSource hangoutEventViewModelBinding = new BindingSource {DataSource = HangoutEventViewModel};
 
             TimeStampLabel.DataBindings.Clear();
-            TimeStampLabel.DataBindings.Add(new Binding("Text", hangoutEventViewModelBinding, nameof(HangoutEventViewModel.TimeStamp)));
+            TimeStampLabel.DataBindings.Add(new Binding(nameof(TimeStampLabel.Text), hangoutEventViewModelBinding, nameof(HangoutEventViewModel.TimeStamp)));
 
             SenderIdLabel.DataBindings.Clear();
-            SenderIdLabel.DataBindings.Add(new Binding("Text", hangoutEventViewModelBinding, nameof(HangoutEventViewModel.SenderId)));
+            SenderIdLabel.DataBindings.Add(new Binding(nameof(SenderIdLabel.Text), hangoutEventViewModelBinding, nameof(HangoutEventViewModel.SenderId)));
 
             SenderNameLabel.DataBindings.Clear();
-            SenderNameLabel.DataBindings.Add(new Binding("Text", hangoutEventViewModelBinding, nameof(HangoutEventViewModel.SenderName)));
+            SenderNameLabel.DataBindings.Add(new Binding(nameof(SenderNameLabel.Text), hangoutEventViewModelBinding, nameof(HangoutEventViewModel.SenderName)));
 
             TextRichTextBox.DataBindings.Clear();
-            TextRichTextBox.DataBindings.Add(new Binding("Rtf", hangoutEventViewModelBinding, nameof(HangoutEventViewModel.TextRtf)));
+            TextRichTextBox.DataBindings.Add(new Binding(nameof(TextRichTextBox.Rtf), hangoutEventViewModelBinding, nameof(HangoutEventViewModel.TextRtf)));
             TextRichTextBox.LinkClicked -= HangoutEventViewModel.RichTextBoxLinkClicked;
             TextRichTextBox.LinkClicked += HangoutEventViewModel.RichTextBoxLinkClicked;
 
             AttachmentRichTextBox.DataBindings.Clear();
-            AttachmentRichTextBox.DataBindings.Add(new Binding("Rtf", hangoutEventViewModelBinding, nameof(HangoutEventViewModel.AttachmentRtf)));
+            AttachmentRichTextBox.DataBindings.Add(new Binding(nameof(AttachmentRichTextBox.Rtf), hangoutEventViewModelBinding, nameof(HangoutEventViewModel.AttachmentRtf)));
             AttachmentRichTextBox.LinkClicked -= HangoutEventViewModel.RichTextBoxLinkClicked;
             AttachmentRichTextBox.LinkClicked += HangoutEventViewModel.RichTextBoxLinkClicked;
         }

@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using HangoutsViewer.Classes;
 using HangoutsViewer.ComponentModel;
 using HangoutsViewer.DataAccess;
+using HangoutsViewer.Extensions;
 using HangoutsViewer.Models.Classes;
 using HangoutsViewer.Models.Interfaces;
 using HangoutsViewer.ViewModels.Interfaces;
@@ -16,12 +16,18 @@ namespace HangoutsViewer.ViewModels.Classes
 {
     public class HangoutsViewModel : IHangoutsViewModel
     {
+        #region Private
+
+        private readonly string _googleTakeoutsUrl = Properties.Settings.Default.GoogleTakeoutsUrl;
+
+        #endregion
+
+
         #region Constructor
 
         public HangoutsViewModel(IHangouts hangouts)
         {
-            if (hangouts == null) { hangouts = new Hangouts(); }
-            Hangouts = hangouts;
+            Hangouts = hangouts ?? new Hangouts();
         }
 
         #endregion
@@ -79,19 +85,20 @@ namespace HangoutsViewer.ViewModels.Classes
 
         public void GoogleTakeoutsToolStripMenuItemClick(object sender, EventArgs e)
         {
-            const string googleTakeouts = "https://takeout.google.com/settings/takeout/custom/chat";
             try
             {
-                Process.Start(googleTakeouts);
+                Process.Start(_googleTakeoutsUrl);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "An error occurred while navigating to " + googleTakeouts + ":" + Environment.NewLine + Environment.NewLine +
-                    "Type: " + ex.GetType().Name + Environment.NewLine +
-                    "Message: " + ex.Message,
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //return;
+                    $"An error occurred while attempting to browse to {_googleTakeoutsUrl}{Environment.NewLine}{Environment.NewLine}" +
+                    $"Error Type: {ex.GetType().Name}{Environment.NewLine}" +
+                    $"Error Message: {ex.Message}",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
         }
 
@@ -102,7 +109,7 @@ namespace HangoutsViewer.ViewModels.Classes
                 aboutView.ShowDialog();
             }
         }
-        
+
         public void HangoutsDataGridRowEnter(object sender, DataGridViewCellEventArgs e)
         {
             if (!(sender is DataGridView hangoutsDataGrid)) { return; }
@@ -148,11 +155,13 @@ namespace HangoutsViewer.ViewModels.Classes
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "An error occurred while navigating to " + clickedLinkCell.Value + ":" + Environment.NewLine + Environment.NewLine +
-                    "Type: " + ex.GetType().Name + Environment.NewLine + 
-                    "Message: " + ex.Message, 
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //return;
+                    $"An error occurred while attempting to browse to {clickedLinkCell.Value}{Environment.NewLine}{Environment.NewLine}" +
+                    $"Error Type: {ex.GetType().Name}{Environment.NewLine}" +
+                    $"Error Message: {ex.Message}",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
         }
 
@@ -188,7 +197,7 @@ namespace HangoutsViewer.ViewModels.Classes
 
             if (!File.Exists(fileName))
             {
-                MessageBox.Show("File " + fileName + " not found!", "File Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"File {fileName} not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -219,14 +228,14 @@ namespace HangoutsViewer.ViewModels.Classes
             {
                 if (ex is ArgumentNullException || ex is NullReferenceException)
                 {
-                    MessageBox.Show("File format not recognized", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("File format not recognized", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 MessageBox.Show(
-                    "An error occurred:" + Environment.NewLine + Environment.NewLine +
-                    "Type: " + ex.GetType().Name + Environment.NewLine +
-                    "Message: " + ex.Message,
-                    "ERROR",
+                    $"An error occurred:{Environment.NewLine}{Environment.NewLine}" +
+                    $"Type: {ex.GetType().Name}{Environment.NewLine}" +
+                    $"Message: {ex.Message}",
+                    "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
@@ -256,7 +265,7 @@ namespace HangoutsViewer.ViewModels.Classes
                 saveFileDialog.Filter = "Csv files (*.csv)|*.csv";
                 saveFileDialog.RestoreDirectory = false;
                 saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                saveFileDialog.Title = "Select a Hangouts .json file";
+                saveFileDialog.Title = "Save As";
                 if (saveFileDialog.ShowDialog() != DialogResult.OK) { return; }
                 fileName = saveFileDialog.FileName;
             }
@@ -277,9 +286,9 @@ namespace HangoutsViewer.ViewModels.Classes
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "An error occcurred while exporting " + SelectedHangoutViewModel.Hangout.Name + " to csv:" + Environment.NewLine + Environment.NewLine +
-                    "Type: " + ex.GetType().Name + Environment.NewLine +
-                    "Message: " + ex.Message,
+                    $"An error occcurred while exporting {SelectedHangoutViewModel.Hangout.Name} to csv:{Environment.NewLine}{Environment.NewLine}" +
+                    $"Type: {ex.GetType().Name}{Environment.NewLine}" +
+                    $"Message: {ex.Message}",
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -295,7 +304,7 @@ namespace HangoutsViewer.ViewModels.Classes
                 }
             }
 
-            if (MessageBox.Show("Do you want to open " + fileName + "?", "Open .csv?", MessageBoxButtons.YesNo, MessageBoxIcon.Information) != DialogResult.Yes) { return; }
+            if (MessageBox.Show($"Do you want to open {fileName}?", "Open .csv?", MessageBoxButtons.YesNo, MessageBoxIcon.Information) != DialogResult.Yes) { return; }
             try
             {
                 Process.Start(fileName);
@@ -303,11 +312,10 @@ namespace HangoutsViewer.ViewModels.Classes
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "An error occcurred while attempting to open " + fileName + ":" + Environment.NewLine + Environment.NewLine +
-                    "Type: " + ex.GetType().Name + Environment.NewLine +
-                    "Message: " + ex.Message,
+                    $"An error occcurred while attempting to open {fileName}:{Environment.NewLine}{Environment.NewLine}" +
+                    $"Type: {ex.GetType().Name}{Environment.NewLine}" +
+                    $"Message: {ex.Message}",
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //return;
             }
         }
 
@@ -316,7 +324,6 @@ namespace HangoutsViewer.ViewModels.Classes
             if (MessageBox.Show("Are you sure you want to exit?", "Exit?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
             {
                 e.Cancel = true;
-                //return;
             }
         }
 

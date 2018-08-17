@@ -5,6 +5,6 @@ namespace HangoutsViewer.Models.Classes
 {
     public class About : IAbout
     {
-        public string AboutText => Resources.About;
+        public string AboutText => Resources.About.Replace("<GoogleTakeoutUrl>", Settings.Default.GoogleTakeoutsUrl);
     }
 }

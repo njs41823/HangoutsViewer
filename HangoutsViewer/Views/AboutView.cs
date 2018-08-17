@@ -24,7 +24,7 @@ namespace HangoutsViewer.Views
 
         private void Bind()
         {
-            AboutRichTextBox.DataBindings.Add("Rtf", AboutViewModel.About, "AboutText");
+            AboutRichTextBox.DataBindings.Add(nameof(AboutRichTextBox.Rtf), AboutViewModel.About, nameof(AboutViewModel.About.AboutText));
             AboutRichTextBox.LinkClicked += AboutViewModel.AboutRichTextBox_LinkClicked;
         }
     }

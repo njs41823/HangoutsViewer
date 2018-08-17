@@ -8,7 +8,7 @@ namespace HangoutsViewer.Models.Classes.HangoutEvents
     {
         public RemoveUserEvent(DateTime timeStamp, IParticipant sender, string text, string attachment, IParticipant removedUser) : base(timeStamp, sender, text, attachment)
         {
-            RemovedUser = removedUser ?? throw new ArgumentNullException(nameof(removedUser), "Parameter IParticipant addedUser cannot be null");
+            RemovedUser = removedUser ?? throw new ArgumentNullException(nameof(removedUser), $"Parameter {typeof(IParticipant)} {nameof(removedUser)} cannot be null");
         }
 
         public IParticipant RemovedUser { get; }
